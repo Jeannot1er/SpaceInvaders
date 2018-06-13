@@ -12,9 +12,9 @@ import iut.Objet;
  *
  * @author jr202109
  */
-public class Tir extends iut.ObjetTouchable{
+public class TirJoueur extends iut.ObjetTouchable{
 
-    public Tir(Jeu g, String nom, int x, int y) {
+    public TirJoueur(Jeu g, String nom, int x, int y) {
         super(g, nom, x, y);
     }
 
@@ -25,13 +25,13 @@ public class Tir extends iut.ObjetTouchable{
 
     @Override
     public String getTypeObjet() {
-        return "Tir";
+        return "TirJoueur";
     }
 
     @Override
     public void evoluer(long dt) {
         if(this.posBasse()>0) {
-            this.deplacerXY(0, -20);
+            this.deplacerXY(0, -10);
         } else {
             this.leJeu().supprimer(this);
         }

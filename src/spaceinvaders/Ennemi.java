@@ -13,15 +13,22 @@ import iut.Objet;
  * @author jr202109
  */
 public class Ennemi extends iut.ObjetTouchable{
+    private int xBase;
+    private int yBase;
+    private boolean gauche = true;
+    private int timer = 0;
 
     public Ennemi(Jeu g, String nom, int x, int y) {
         super(g, nom, x, y);
+        this.xBase = x;
+        this.yBase = y;
     }
 
     @Override
     public void effetCollision(Objet o) {
-        if(o.getTypeObjet().equals("Tir")) {
+        if(o.getTypeObjet().equals("TirJoueur")) {
             this.leJeu().supprimer(this);
+            this.leJeu().supprimer(o);
         }
     }
 
@@ -32,10 +39,25 @@ public class Ennemi extends iut.ObjetTouchable{
 
     @Override
     public void evoluer(long dt) {
-        if(this.posGauche()>10) {
-            this.deplacerXY(-5,0);
+        if(this.posGauche()>xBase-180 && gauche) {
+            this.deplacerXY(-1,0);
+        } else if(this.posGauche()<=xBase-180) {
+            this.deplacerXY(1, 79);
+            this.gauche = false;
+        } else if(this.posDroite()<xBase+244 && !gauche){
+            this.deplacerXY(1,0);
+        } else if(this.posDroite()>=xBase+244) {
+            this.deplacerXY(-1,79);
+            this.gauche = true;
+        }
+        if(timer>1000) {
+            if(Math.random()<0.15) {
+                TirEnnemi tir = new TirEnnemi(this.leJeu(),"torpedo",this.milieuX(),this.posBasse());
+                this.leJeu().ajouter(tir);       
+            }
+            timer = 0;
         } else {
-            this.deplacerXY(1200, 80);
+            timer += dt;
         }
     }
     

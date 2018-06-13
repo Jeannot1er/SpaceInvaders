@@ -31,9 +31,10 @@ public class SpaceInvaders extends iut.Jeu{
         Joueur j = new Joueur(this, "vaisseau", 618, 650);
         this.ajouteEcouteurClavier(j);
         this.ajouter(j);
-        Ennemi e = new Ennemi(this, "ennemi", 1200, 20);
-        this.ajouter(e);
-
+        for(int i=0; i<30;i++) {
+            Ennemi e = new Ennemi(this, "ennemi", 185+94*(i%10), 30+79*(i/10));
+            this.ajouter(e);    
+        }
     }
 
     @Override
