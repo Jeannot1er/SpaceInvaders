@@ -25,7 +25,9 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
 
     @Override
     public void effetCollision(Objet o) {
-        
+        if(o.getTypeObjet()=="TirEnnemi" || o.getTypeObjet()=="Ennemi") {
+            this.leJeu().supprimer(this);
+        }
     }
 
     @Override
@@ -64,7 +66,7 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
                 break;
             case KeyEvent.VK_SPACE :
                 if(peutTirer) {
-                    Tir t = new Tir(this.leJeu(), "torpedo", this.milieuX(), this.posHaute()+2); 
+                    TirJoueur t = new TirJoueur(this.leJeu(), "torpedo", this.milieuX(), this.posHaute()); 
                     this.leJeu().ajouter(t);
                     peutTirer = false;
                 }
