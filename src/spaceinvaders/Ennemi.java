@@ -20,7 +20,9 @@ public class Ennemi extends iut.ObjetTouchable{
 
     @Override
     public void effetCollision(Objet o) {
-        
+        if(o.getTypeObjet().equals("Tir")) {
+            this.leJeu().supprimer(this);
+        }
     }
 
     @Override
@@ -30,7 +32,11 @@ public class Ennemi extends iut.ObjetTouchable{
 
     @Override
     public void evoluer(long dt) {
-        
+        if(this.posGauche()>10) {
+            this.deplacerXY(-5,0);
+        } else {
+            this.deplacerXY(1200, 80);
+        }
     }
     
 }
