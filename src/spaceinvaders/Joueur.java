@@ -18,6 +18,8 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
     
     private int timerTir = 0;
     private boolean peutTirer = true;
+    private int compteurBonus =0;
+    private int tempsEntreTirs = 500;
 
     public Joueur(Jeu g, String nom, int x, int y) {
         super(g, nom, x, y);
@@ -25,9 +27,13 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
 
     @Override
     public void effetCollision(Objet o) {
-        if(o.getTypeObjet()=="TirEnnemi" || o.getTypeObjet()=="Ennemi") {
-            this.leJeu().supprimer(this);
+        
+        switch(o.getTypeObjet()){
+            case "TirEnnemi" : this.leJeu().supprimer(this); break;
+            case "Ennemi" : this.leJeu().supprimer(this); break;
+            case "Bonus" : tempsEntreTirs-=100;this.leJeu().supprimer(o); break;
         }
+
     }
 
     @Override
@@ -39,10 +45,15 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
     public void evoluer(long dt) {
         if(!peutTirer){
             timerTir += dt;
-            if(timerTir>500) {
+            if(timerTir>tempsEntreTirs) {
                 peutTirer=true;
                 timerTir = 0;
             }
+        }
+        if(compteurBonus == 0){
+            Bonus b = new Bonus(this.leJeu(), "star",this.posHaute(),0);
+            this.leJeu().ajouter(b);
+            compteurBonus+=1;
         }
     }
 
