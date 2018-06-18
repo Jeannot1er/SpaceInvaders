@@ -29,8 +29,8 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
     public void effetCollision(Objet o) {
         
         switch(o.getTypeObjet()){
-            case "TirEnnemi" : this.leJeu().supprimer(this); break;
-            case "Ennemi" : this.leJeu().supprimer(this); break;
+            case "TirEnnemi" : this.leJeu().supprimer(this);this.leJeu().mourir(); break;
+            case "Ennemi" : this.leJeu().supprimer(this);this.leJeu().mourir(); break;
             case "Bonus" : tempsEntreTirs-=100;this.leJeu().supprimer(o); break;
         }
 
