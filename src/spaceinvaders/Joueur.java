@@ -18,8 +18,8 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
     
     private int timerTir = 0;
     private boolean peutTirer = true;
-    private int compteurBonus =0;
     private int tempsEntreTirs = 500;
+    private int vie = 3;
 
     public Joueur(Jeu g, String nom, int x, int y) {
         super(g, nom, x, y);
@@ -27,13 +27,13 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
 
     @Override
     public void effetCollision(Objet o) {
-        
-        switch(o.getTypeObjet()){
-            case "TirEnnemi" : this.leJeu().supprimer(this);this.leJeu().mourir(); break;
-            case "Ennemi" : this.leJeu().supprimer(this);this.leJeu().mourir(); break;
-            case "Bonus" : tempsEntreTirs-=100;this.leJeu().supprimer(o); break;
+        if(("TirEnnemi".equals(o.getTypeObjet())) || ("Ennemi".equals(o.getTypeObjet()))) {
+            this.leJeu().supprimer(this);
+            this.leJeu().mourir();
+        } else if("Bonus".equals(o.getTypeObjet())) {
+            if(tempsEntreTirs>200) tempsEntreTirs -= 50;
+            this.leJeu().supprimer(o);
         }
-
     }
 
     @Override
@@ -49,11 +49,6 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
                 peutTirer=true;
                 timerTir = 0;
             }
-        }
-        if(compteurBonus == 0){
-            Bonus b = new Bonus(this.leJeu(), "star",this.posHaute(),0);
-            this.leJeu().ajouter(b);
-            compteurBonus+=1;
         }
     }
 
@@ -77,7 +72,7 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener{
                 break;
             case KeyEvent.VK_SPACE :
                 if(peutTirer) {
-                    TirJoueur t = new TirJoueur(this.leJeu(), "torpedo", this.milieuX(), this.posHaute()); 
+                    TirJoueur t = new TirJoueur(this.leJeu(), "tirJoueur", this.milieuX(), this.posHaute()); 
                     this.leJeu().ajouter(t);
                     peutTirer = false;
                 }

@@ -7,7 +7,6 @@ package spaceinvaders;
 
 import iut.Jeu;
 import iut.Objet;
-import java.util.HashMap;
 
 /**
  *

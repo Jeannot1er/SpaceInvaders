@@ -40,7 +40,7 @@ public class SpaceInvaders extends iut.Jeu{
 
     @Override
     protected void dessinerArrierePlan(Graphics g) {
-        g.setColor(Color.PINK);
+        g.setColor(Color.GRAY);
         g.fillRect(0, 0, largeur(), hauteur());
     }
 

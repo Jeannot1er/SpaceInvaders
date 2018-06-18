@@ -32,7 +32,7 @@ public class Bonus extends ObjetTouchable{
     @Override
     public void evoluer(long dt) {
         if(this.posHaute()<this.leJeu().hauteur()) {
-            this.deplacerXY(0, 1);
+            this.deplacerXY(0, 2);
         } else {
             this.leJeu().supprimer(this);
         }
