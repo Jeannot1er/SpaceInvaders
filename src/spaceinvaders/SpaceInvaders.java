@@ -7,6 +7,7 @@ package spaceinvaders;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,7 +33,7 @@ public class SpaceInvaders extends iut.Jeu{
         this.ajouteEcouteurClavier(j);
         this.ajouter(j);
         for(int i=0; i<30;i++) {
-            Ennemi e = new Ennemi(this, "ennemi", 185+94*(i%10), 30+79*(i/10));
+            Ennemi e = new Ennemi(this, "ennemi", 185+94*(i%10), -160+79*(i/10));
             this.ajouter(e);    
         }
     }
@@ -45,12 +46,12 @@ public class SpaceInvaders extends iut.Jeu{
 
     @Override
     protected void perdu() {
-
+        JOptionPane.showMessageDialog(this, "Vous avez perdu");
     }
 
     @Override
     protected void gagne() {
-
+        JOptionPane.showMessageDialog(this, "Vous avez gagné");
     }
 
     @Override

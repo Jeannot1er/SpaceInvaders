@@ -39,6 +39,12 @@ public class Ennemi extends iut.ObjetTouchable{
 
     @Override
     public void evoluer(long dt) {
+        
+        if(this.posBasse()>this.leJeu().hauteur()){
+            this.leJeu().mourir();
+            System.out.println("salut");
+        }
+
         if(this.posGauche()>xBase-180 && gauche) {
             this.deplacerXY(-1,0);
         } else if(this.posGauche()<=xBase-180) {
@@ -50,8 +56,10 @@ public class Ennemi extends iut.ObjetTouchable{
             this.deplacerXY(-1,79);
             this.gauche = true;
         }
+        
+        
         if(timer>1000) {
-            if(Math.random()<0.15) {
+            if(Math.random()<0.10) {
                 TirEnnemi tir = new TirEnnemi(this.leJeu(),"torpedo",this.milieuX(),this.posBasse());
                 this.leJeu().ajouter(tir);       
             }
