@@ -29,7 +29,7 @@ public class SpaceInvaders extends iut.Jeu{
 
     @Override
     protected void creeObjets() {
-        Joueur j = new Joueur(this, "vaisseau", 618, 650);
+        Joueur j = new Joueur(this, "joueur", 618, 650);
         this.ajouteEcouteurClavier(j);
         this.ajouter(j);
         for(int i=0; i<30;i++) {
