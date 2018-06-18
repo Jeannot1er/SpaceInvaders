@@ -62,7 +62,7 @@ public class Ennemi extends iut.ObjetTouchable{
         
         
         if(timer>1000) {
-            if(Math.random()<0.10) {
+            if(Math.random()<0.10){
                 TirEnnemi tir = new TirEnnemi(this.leJeu(),"tirEnnemi",this.milieuX(),this.posBasse());
                 this.leJeu().ajouter(tir);       
             }
@@ -71,5 +71,5 @@ public class Ennemi extends iut.ObjetTouchable{
             timer += dt;
         }
     }
-    
+     
 }
