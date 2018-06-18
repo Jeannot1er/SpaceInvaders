@@ -44,7 +44,7 @@ public class Ennemi extends iut.ObjetTouchable{
     @Override
     public void evoluer(long dt) {
         
-        if(this.posBasse()>this.leJeu().hauteur()){
+        if(this.posBasse()>this.leJeu().hauteur()-64){
             this.leJeu().mourir();
         }
 

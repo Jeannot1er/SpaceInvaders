@@ -24,7 +24,7 @@ public class SpaceInvaders extends iut.Jeu{
     }
 
     public SpaceInvaders() {
-        super(1280, 720, "Space invaders");
+        super(1280, 784, "Space invaders");
     }
 
     @Override

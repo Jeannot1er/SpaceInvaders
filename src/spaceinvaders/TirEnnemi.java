@@ -29,8 +29,8 @@ public class TirEnnemi extends iut.ObjetTouchable{
     }
 
     @Override
-    public void evoluer(long dt) {
-        if(this.posHaute()<this.leJeu().hauteur()) {
+    public void evoluer(long dt) {        
+        if(this.posBasse()<this.leJeu().hauteur()-64) {
             this.deplacerXY(0, 2);
         } else {
             this.leJeu().supprimer(this);
