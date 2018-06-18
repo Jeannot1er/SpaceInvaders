@@ -29,6 +29,10 @@ public class Ennemi extends iut.ObjetTouchable{
         if(o.getTypeObjet().equals("TirJoueur")) {
             this.leJeu().supprimer(this);
             this.leJeu().supprimer(o);
+            if(Math.random()<0.2) {
+                Bonus b = new Bonus(this.leJeu(), "bonus", this.milieuX(), this.posBasse());
+                this.leJeu().ajouter(b);
+            }
         }
     }
 
@@ -42,25 +46,24 @@ public class Ennemi extends iut.ObjetTouchable{
         
         if(this.posBasse()>this.leJeu().hauteur()){
             this.leJeu().mourir();
-            System.out.println("salut");
         }
 
         if(this.posGauche()>xBase-180 && gauche) {
             this.deplacerXY(-1,0);
         } else if(this.posGauche()<=xBase-180) {
-            this.deplacerXY(1, 79);
+            this.deplacerXY(1, 50);
             this.gauche = false;
         } else if(this.posDroite()<xBase+244 && !gauche){
             this.deplacerXY(1,0);
         } else if(this.posDroite()>=xBase+244) {
-            this.deplacerXY(-1,79);
+            this.deplacerXY(-1,50);
             this.gauche = true;
         }
         
         
         if(timer>1000) {
             if(Math.random()<0.10) {
-                TirEnnemi tir = new TirEnnemi(this.leJeu(),"torpedo",this.milieuX(),this.posBasse());
+                TirEnnemi tir = new TirEnnemi(this.leJeu(),"tirEnnemi",this.milieuX(),this.posBasse());
                 this.leJeu().ajouter(tir);       
             }
             timer = 0;
