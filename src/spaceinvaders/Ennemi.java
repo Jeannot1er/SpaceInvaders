@@ -17,6 +17,9 @@ public class Ennemi extends iut.ObjetTouchable{
     private int yBase;
     private boolean gauche = true;
     private int timer = 0;
+    private static int score = 0;
+    private Score unite;
+    private Score dizaine;
 
     public Ennemi(Jeu g, String nom, int x, int y) {
         super(g, nom, x, y);
@@ -27,12 +30,20 @@ public class Ennemi extends iut.ObjetTouchable{
     @Override
     public void effetCollision(Objet o) {
         if(o.getTypeObjet().equals("TirJoueur")) {
-            this.leJeu().supprimer(this);
             this.leJeu().supprimer(o);
+            this.leJeu().supprimer(this);
             if(Math.random()<0.2) {
                 Bonus b = new Bonus(this.leJeu(), "bonus", this.milieuX(), this.posBasse());
                 this.leJeu().ajouter(b);
             }
+            
+            score ++;
+            this.leJeu().supprimer(unite);
+            this.leJeu().supprimer(dizaine);
+            unite = new Score(this.leJeu(), score%10, 32);
+            dizaine = new Score(this.leJeu(), score/10, 0);
+            this.leJeu().ajouter(unite);
+            this.leJeu().ajouter(dizaine);
         }
     }
 
