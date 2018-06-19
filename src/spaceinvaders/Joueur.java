@@ -26,20 +26,20 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener {
     public Joueur(Jeu g, String nom, int x, int y) {
         super(g, nom, x, y);
         vie = 3;
-        objVie = new Vie(g, String.valueOf(vie) + "vie", 10, 700);
+        objVie = new Vie(g, vie);
         this.leJeu().ajouter(objVie);
     }
 
     @Override
     public void effetCollision(Objet o) {
-        if (("TirEnnemi".equals(o.getTypeObjet()))) { //|| ("Ennemi".equals(o.getTypeObjet()))
+        if ("TirEnnemi".equals(o.getTypeObjet())|| "Ennemi".equals(o.getTypeObjet())) {
             this.leJeu().supprimer(o);
             if (vie >= 1) {
                 vie -= 1;
                 System.out.println(vie);
 
                 this.leJeu().supprimer(objVie);
-                objVie = new Vie(this.leJeu(), String.valueOf(vie) + "vie", 10, 700);
+                objVie = new Vie(this.leJeu(), vie);
                 this.leJeu().ajouter(objVie);
 
             }
@@ -50,7 +50,7 @@ public class Joueur extends iut.ObjetTouchable implements KeyListener {
             if (tempsEntreTirs > 200) {
                 tempsEntreTirs -= 50;
             }
-            // this.leJeu().supprimer(o);
+            this.leJeu().supprimer(o);
         }
 
     }
