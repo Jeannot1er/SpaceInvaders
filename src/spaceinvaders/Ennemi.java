@@ -83,4 +83,7 @@ public class Ennemi extends iut.ObjetTouchable{
         }
     }
      
+    public int getScore() {
+        return score;
+    }
 }

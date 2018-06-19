@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author jr202109
  */
 public class SpaceInvaders extends iut.Jeu{
-
+    private Ennemi e;
     /**
      * @param args the command line arguments
      */
@@ -33,8 +33,8 @@ public class SpaceInvaders extends iut.Jeu{
         this.ajouteEcouteurClavier(j);
         this.ajouter(j);
         for(int i=0; i<30;i++) {
-            Ennemi e = new Ennemi(this, "ennemi", 185+94*(i%10), -160+79*(i/10));
-            this.ajouter(e);    
+            e = new Ennemi(this, "ennemi", 185+94*(i%10), -160+79*(i/10));
+            this.ajouter(e);
         }
     }
 
@@ -42,6 +42,8 @@ public class SpaceInvaders extends iut.Jeu{
     protected void dessinerArrierePlan(Graphics g) {
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, largeur(), hauteur());
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(0,720,largeur(), hauteur());
     }
 
     @Override
@@ -56,7 +58,11 @@ public class SpaceInvaders extends iut.Jeu{
 
     @Override
     protected boolean aGagne() {
-        return false;
+        boolean fin = false;
+        if(e.getScore()>=30) {
+            fin = true;
+        }
+        return fin;
     }
 
     @Override
